@@ -44,7 +44,7 @@ public class RelatorioController {
 
   // GET - All
   @GetMapping
-  public ResponseEntity<Page<RelatorioResponse>> findAll(
+  public ResponseEntity<Page<RelatorioResponse>> readRelatorios(
       @RequestParam(required = false) String cidade,
       @RequestParam(required = false) Long usuarioId,
       @RequestParam(required = false) Long droneId,
@@ -58,7 +58,7 @@ public class RelatorioController {
 
   // GET - Id
   @GetMapping("/{id}")
-  public ResponseEntity<RelatorioResponse> findById(@PathVariable Long id){
+  public ResponseEntity<RelatorioResponse> readRelatorio(@PathVariable Long id){
     RelatorioResponse relatorio = relatorioService.findById(id);
     return new ResponseEntity<>(relatorio, HttpStatus.OK);
   }

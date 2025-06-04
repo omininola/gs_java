@@ -33,7 +33,7 @@ public class EstadoController {
 
   // GET - All
   @GetMapping
-  public ResponseEntity<Page<EstadoResponse>> readEstadoes(
+  public ResponseEntity<Page<EstadoResponse>> readEstados(
     @RequestParam(defaultValue = "0") int pageNumber,
     @RequestParam(defaultValue = "10") int pageSize,
     @RequestParam(defaultValue = "id") String sort
