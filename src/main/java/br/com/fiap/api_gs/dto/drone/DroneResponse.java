@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.fiap.api_gs.entity.Relatorio;
+import br.com.fiap.api_gs.entity.Sensor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,5 +15,6 @@ public class DroneResponse {
   private String modelo;
   private String status;
   private List<Relatorio> relatorios = new ArrayList<>();
+  private List<Sensor> sensores = new ArrayList<>();
 
 }

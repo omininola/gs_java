@@ -83,6 +83,7 @@ public class DroneService {
     droneResponse.setModelo(drone.getModelo());
     droneResponse.setStatus(drone.getStatus());
     droneResponse.setRelatorios(drone.getRelatorios());
+    droneResponse.setSensores(drone.getSensores());
 
     return droneResponse;
   }

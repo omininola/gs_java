@@ -94,6 +94,8 @@ public class RelatorioService {
     relatorioUpdate.setCidade(cidade.get());
     relatorioUpdate.setDescricao(relatorioRequest.getDescricao());
 
+    relatorioRepository.save(relatorioUpdate);
+
     return toResponse(relatorioUpdate);
   }
 

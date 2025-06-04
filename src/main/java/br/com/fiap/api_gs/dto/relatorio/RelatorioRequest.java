@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class RelatorioRequest {
+public class RelatorioRequest {
 
   @NotNull(message = "Id da cidade deve ser preenchido")
   private Long cidadeId;

@@ -3,6 +3,8 @@ package br.com.fiap.api_gs.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,6 +37,7 @@ public class Cidade {
 
   @ManyToOne
   @JoinColumn(name = "estado_id")
+  @JsonIgnore
   private Estado estado;
   
   @OneToMany(mappedBy = "cidade", cascade = CascadeType.ALL, orphanRemoval = true)

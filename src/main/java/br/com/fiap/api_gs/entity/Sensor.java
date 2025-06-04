@@ -1,5 +1,7 @@
 package br.com.fiap.api_gs.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +29,7 @@ public class Sensor {
 
   @ManyToOne
   @JoinColumn(name = "drone_id")
+  @JsonIgnore
   private Drone drone;
 
   @Column(name = "tipo", nullable = false)
