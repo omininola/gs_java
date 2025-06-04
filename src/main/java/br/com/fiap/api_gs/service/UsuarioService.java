@@ -100,7 +100,7 @@ public class UsuarioService {
     usuarioResponse.setId(usuario.getId());
     usuarioResponse.setNome(usuario.getNome());
     usuarioResponse.setSenha(usuario.getSenha());
-    usuarioResponse.setEmail(usuario.getSenha());
+    usuarioResponse.setEmail(usuario.getEmail());
     usuarioResponse.setRelatorios(usuario.getRelatorios());
 
     return usuarioResponse;
