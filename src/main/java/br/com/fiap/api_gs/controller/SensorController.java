@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fiap.api_gs.dto.sensor.SensorRequest;
 import br.com.fiap.api_gs.dto.sensor.SensorResponse;
 import br.com.fiap.api_gs.service.SensorService;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/sensores")
@@ -24,7 +26,7 @@ public class SensorController {
 
   // POST
   @PostMapping
-  public ResponseEntity<SensorResponse> createSesnor(SensorRequest sensorRequest){
+  public ResponseEntity<SensorResponse> createSensor(@Valid @RequestBody SensorRequest sensorRequest){
     return new ResponseEntity<>(sensorService.save(sensorRequest), HttpStatus.OK);
   }
 

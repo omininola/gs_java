@@ -60,7 +60,7 @@ public class DroneController {
 
   // DELETE
   @DeleteMapping("/{id}")
-  public ResponseEntity<DroneResponse> deleteDrone(Long id){
+  public ResponseEntity<DroneResponse> deleteDrone(@PathVariable Long id){
     droneService.delete(id);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }

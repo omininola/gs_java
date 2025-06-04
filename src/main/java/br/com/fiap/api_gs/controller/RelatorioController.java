@@ -65,10 +65,7 @@ public class RelatorioController {
 
   // PUT
   @PutMapping("/{id}")
-  public ResponseEntity<RelatorioResponse> updateRelatorio(
-    @PathVariable Long id,
-    @Valid @RequestBody RelatorioRequest relatorioRequest
-  ) {
+  public ResponseEntity<RelatorioResponse> updateRelatorio(@PathVariable Long id, @Valid @RequestBody RelatorioRequest relatorioRequest) {
     RelatorioResponse relatorio = relatorioService.update(id, relatorioRequest);
     return new ResponseEntity<>(relatorio, HttpStatus.OK);
   }
