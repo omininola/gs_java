@@ -1,0 +1,8 @@
+Github Link: https://github.com/omininola/sprint1_java
+
+|---------------------------------|
+| Nome                   |   RM   |
+|:-----------------------|:------:|
+| Otavio Miklos Nogueira | 554513 |
+| Luciayla Yumi Kawakami | 557987 |
+|---------------------------------|
