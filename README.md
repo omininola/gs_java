@@ -39,7 +39,7 @@ E siga a partir de [Spring Security + JWT](#spring-security--jwt)
 ### Inicialização local
 
 1. Clone esse repositório: `git clone https://github.com/omininola/gs_java`
-2. Entre na pasta do projeto: `cd gs_java/project`
+2. Entre na pasta do projeto: `cd gs_java`
 3. Build o projeto utilizando o Maven: `./mvnw package`
 4. Rode o jar buildado: `java -jar target/api_gs-0.0.1-SNAPSHOT.jar`
 5. Vá até a URL: http://localhost:8080/swagger-ui/index.html
@@ -54,7 +54,9 @@ Você pode gerar um token pela rota [/usuarios/register](http://localhost:8080/s
 Ou resgatar um token (caso já tenha um conta para logar) pela rota [/usuarios/login](http://localhost:8080/swagger-ui/index.html#/usuario-controller/loginUsuario)
 
 Com o token em mãos, você pode clicar no botão verde e colar o seu token:
+
 ![Botão de autorização](docs/image.png)
+
 ![Modal de autorização](docs/image2.png)
 
 Depois disso você pode explorar todos os endpoints da nossa API
