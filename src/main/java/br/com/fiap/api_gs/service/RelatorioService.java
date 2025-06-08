@@ -79,6 +79,10 @@ public class RelatorioService {
 
     public RelatorioResponse findById(Long id) {
         Optional<Relatorio> relatorio = relatorioRepository.findById(id);
+        if (relatorio.isEmpty()) {
+            throw new NotFoundException("Relatório não encontrado");
+        }
+
         return toResponse(relatorio.get());
     }
 
