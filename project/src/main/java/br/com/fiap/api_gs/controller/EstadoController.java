@@ -21,32 +21,31 @@ import jakarta.validation.Valid;
 @RequestMapping("/estados")
 public class EstadoController {
 
-  @Autowired
-  private EstadoService estadoService;
+    @Autowired
+    private EstadoService estadoService;
 
-  // POST
-  @PostMapping
-  public ResponseEntity<EstadoResponse> createEstado(@Valid @RequestBody EstadoRequest estadoRequest){
-    EstadoResponse estado = estadoService.save(estadoRequest);
-    return new ResponseEntity<>(estado, HttpStatus.OK);
-  }
+    // POST
+    @PostMapping
+    public ResponseEntity<EstadoResponse> createEstado(@Valid @RequestBody EstadoRequest estadoRequest) {
+        EstadoResponse estado = estadoService.save(estadoRequest);
+        return new ResponseEntity<>(estado, HttpStatus.OK);
+    }
 
-  // GET - All
-  @GetMapping
-  public ResponseEntity<Page<EstadoResponse>> readEstados(
-    @RequestParam(defaultValue = "0") int pageNumber,
-    @RequestParam(defaultValue = "10") int pageSize,
-    @RequestParam(defaultValue = "id") String sort
-  ){
-    Page<EstadoResponse> estados = estadoService.findAll(pageNumber, pageSize, sort);
-    return new ResponseEntity<>(estados, HttpStatus.OK);
-  }
+    // GET - All
+    @GetMapping
+    public ResponseEntity<Page<EstadoResponse>> readEstados(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "10") int pageSize,
+            @RequestParam(defaultValue = "id") String sort) {
+        Page<EstadoResponse> estados = estadoService.findAll(pageNumber, pageSize, sort);
+        return new ResponseEntity<>(estados, HttpStatus.OK);
+    }
 
-  // GET - Id
-  @GetMapping("/{id}")
-  public ResponseEntity<EstadoResponse> readEstado(@PathVariable Long id){
-    EstadoResponse estado = estadoService.findById(id);
-    return new ResponseEntity<>(estado, HttpStatus.OK);
-  }
+    // GET - Id
+    @GetMapping("/{id}")
+    public ResponseEntity<EstadoResponse> readEstado(@PathVariable Long id) {
+        EstadoResponse estado = estadoService.findById(id);
+        return new ResponseEntity<>(estado, HttpStatus.OK);
+    }
 
 }

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.fiap.api_gs.entity.usuario.Usuario;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,34 +21,35 @@ import lombok.Setter;
 @Entity
 @Table(name = "TB_GS_RELATORIO")
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Relatorio {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @ManyToOne
-  @JoinColumn(name = "cidade_id", nullable = false)
-  @JsonIgnore
-  private Cidade cidade;
+    @ManyToOne
+    @JoinColumn(name = "cidade_id", nullable = false)
+    @JsonIgnore
+    private Cidade cidade;
 
-  @ManyToOne
-  @JoinColumn(name = "drone_id", nullable = true)
-  @JsonIgnore
-  private Drone drone;
+    @ManyToOne
+    @JoinColumn(name = "drone_id", nullable = true)
+    @JsonIgnore
+    private Drone drone;
 
-  @ManyToOne
-  @JoinColumn(name = "usuario_id", nullable = true)
-  @JsonIgnore
-  private Usuario usuario;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = true)
+    @JsonIgnore
+    private Usuario usuario;
 
-  @Column(name = "desc_relatorio", nullable = false)
-  private String descricao;
+    @Column(name = "desc_relatorio", nullable = false)
+    private String descricao;
 
-  @Column(name = "dt_relatorio", nullable = false)
-  private LocalDateTime data;
+    @Column(name = "dt_relatorio", nullable = false)
+    private LocalDateTime data;
 
 }

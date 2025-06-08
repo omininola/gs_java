@@ -25,56 +25,59 @@ import jakarta.validation.Valid;
 @RequestMapping("/relatorios")
 public class RelatorioController {
 
-  @Autowired
-  private RelatorioService relatorioService;
+    @Autowired
+    private RelatorioService relatorioService;
 
-  // POST - Usuario
-  @PostMapping("/usuario")
-  public ResponseEntity<RelatorioResponse> createRelatorioUsuario(@Valid @RequestBody RelatorioRequestUsuario relatorioRequest){
-    RelatorioResponse relatorio = relatorioService.save(relatorioRequest);
-    return new ResponseEntity<>(relatorio, HttpStatus.OK);
-  }
+    // POST - Usuario
+    @PostMapping("/usuario")
+    public ResponseEntity<RelatorioResponse> createRelatorioUsuario(
+            @Valid @RequestBody RelatorioRequestUsuario relatorioRequest) {
+        RelatorioResponse relatorio = relatorioService.save(relatorioRequest);
+        return new ResponseEntity<>(relatorio, HttpStatus.OK);
+    }
 
-  // POST - Drone
-  @PostMapping("/drone")
-  public ResponseEntity<RelatorioResponse> createRelatorioDrone(@Valid @RequestBody RelatorioRequestDrone relatorioRequest){
-    RelatorioResponse relatorio = relatorioService.save(relatorioRequest);
-    return new ResponseEntity<>(relatorio, HttpStatus.OK);
-  }
+    // POST - Drone
+    @PostMapping("/drone")
+    public ResponseEntity<RelatorioResponse> createRelatorioDrone(
+            @Valid @RequestBody RelatorioRequestDrone relatorioRequest) {
+        RelatorioResponse relatorio = relatorioService.save(relatorioRequest);
+        return new ResponseEntity<>(relatorio, HttpStatus.OK);
+    }
 
-  // GET - All
-  @GetMapping
-  public ResponseEntity<Page<RelatorioResponse>> readRelatorios(
-      @RequestParam(required = false) String cidade,
-      @RequestParam(required = false) Long usuarioId,
-      @RequestParam(required = false) Long droneId,
-      @RequestParam(defaultValue = "0") int pageNumber,
-      @RequestParam(defaultValue = "10") int pageSize,
-      @RequestParam(defaultValue = "id") String sort
-  ) {
-      Page<RelatorioResponse> relatorios = relatorioService.findAllFiltered(cidade, usuarioId, droneId, pageNumber, pageSize, sort);
-      return new ResponseEntity<>(relatorios, HttpStatus.OK);
-  }
+    // GET - All
+    @GetMapping
+    public ResponseEntity<Page<RelatorioResponse>> readRelatorios(
+            @RequestParam(required = false) String cidade,
+            @RequestParam(required = false) Long usuarioId,
+            @RequestParam(required = false) Long droneId,
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "10") int pageSize,
+            @RequestParam(defaultValue = "id") String sort) {
+        Page<RelatorioResponse> relatorios = relatorioService.findAllFiltered(cidade, usuarioId, droneId, pageNumber,
+                pageSize, sort);
+        return new ResponseEntity<>(relatorios, HttpStatus.OK);
+    }
 
-  // GET - Id
-  @GetMapping("/{id}")
-  public ResponseEntity<RelatorioResponse> readRelatorio(@PathVariable Long id){
-    RelatorioResponse relatorio = relatorioService.findById(id);
-    return new ResponseEntity<>(relatorio, HttpStatus.OK);
-  }
+    // GET - Id
+    @GetMapping("/{id}")
+    public ResponseEntity<RelatorioResponse> readRelatorio(@PathVariable Long id) {
+        RelatorioResponse relatorio = relatorioService.findById(id);
+        return new ResponseEntity<>(relatorio, HttpStatus.OK);
+    }
 
-  // PUT
-  @PutMapping("/{id}")
-  public ResponseEntity<RelatorioResponse> updateRelatorio(@PathVariable Long id, @Valid @RequestBody RelatorioRequest relatorioRequest) {
-    RelatorioResponse relatorio = relatorioService.update(id, relatorioRequest);
-    return new ResponseEntity<>(relatorio, HttpStatus.OK);
-  }
+    // PUT
+    @PutMapping("/{id}")
+    public ResponseEntity<RelatorioResponse> updateRelatorio(@PathVariable Long id,
+            @Valid @RequestBody RelatorioRequest relatorioRequest) {
+        RelatorioResponse relatorio = relatorioService.update(id, relatorioRequest);
+        return new ResponseEntity<>(relatorio, HttpStatus.OK);
+    }
 
-  // DELETE
-  @DeleteMapping("/{id}")
-  public ResponseEntity<RelatorioResponse> deleteRelatorio(@PathVariable Long id){
-    relatorioService.delete(id);
-    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-  }
+    // DELETE
+    @DeleteMapping("/{id}")
+    public ResponseEntity<RelatorioResponse> deleteRelatorio(@PathVariable Long id) {
+        relatorioService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 }

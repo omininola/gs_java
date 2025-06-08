@@ -21,32 +21,31 @@ import jakarta.validation.Valid;
 @RequestMapping("/cidades")
 public class CidadeController {
 
-  @Autowired
-  private CidadeService cidadeService;
+    @Autowired
+    private CidadeService cidadeService;
 
-  // POST
-  @PostMapping
-  public ResponseEntity<CidadeResponse> createCidade(@Valid @RequestBody CidadeRequest cidadeRequest){
-    CidadeResponse cidade = cidadeService.save(cidadeRequest);
-    return new ResponseEntity<>(cidade, HttpStatus.OK);
-  }
+    // POST
+    @PostMapping
+    public ResponseEntity<CidadeResponse> createCidade(@Valid @RequestBody CidadeRequest cidadeRequest) {
+        CidadeResponse cidade = cidadeService.save(cidadeRequest);
+        return new ResponseEntity<>(cidade, HttpStatus.OK);
+    }
 
-  // GET - All
-  @GetMapping
-  public ResponseEntity<Page<CidadeResponse>> readCidadees(
-    @RequestParam(defaultValue = "0") int pageNumber,
-    @RequestParam(defaultValue = "10") int pageSize,
-    @RequestParam(defaultValue = "id") String sort
-  ){
-    Page<CidadeResponse> cidades = cidadeService.findAll(pageNumber, pageSize, sort);
-    return new ResponseEntity<>(cidades, HttpStatus.OK);
-  }
+    // GET - All
+    @GetMapping
+    public ResponseEntity<Page<CidadeResponse>> readCidadees(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "10") int pageSize,
+            @RequestParam(defaultValue = "id") String sort) {
+        Page<CidadeResponse> cidades = cidadeService.findAll(pageNumber, pageSize, sort);
+        return new ResponseEntity<>(cidades, HttpStatus.OK);
+    }
 
-  // GET - Id
-  @GetMapping("/{id}")
-  public ResponseEntity<CidadeResponse> readCidade(@PathVariable Long id){
-    CidadeResponse cidade = cidadeService.findById(id);
-    return new ResponseEntity<>(cidade, HttpStatus.OK);
-  }
+    // GET - Id
+    @GetMapping("/{id}")
+    public ResponseEntity<CidadeResponse> readCidade(@PathVariable Long id) {
+        CidadeResponse cidade = cidadeService.findById(id);
+        return new ResponseEntity<>(cidade, HttpStatus.OK);
+    }
 
 }

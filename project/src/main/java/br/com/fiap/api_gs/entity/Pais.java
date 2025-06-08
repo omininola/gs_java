@@ -19,18 +19,19 @@ import lombok.Setter;
 @Entity
 @Table(name = "TB_GS_PAIS")
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Pais {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(name = "nm_pais", nullable = false)
-  private String nome;
-  
-  @OneToMany(mappedBy = "pais", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<Estado> estados = new ArrayList<>();
+    @Column(name = "nm_pais", nullable = false)
+    private String nome;
+
+    @OneToMany(mappedBy = "pais", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Estado> estados = new ArrayList<>();
 }

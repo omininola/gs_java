@@ -12,23 +12,23 @@ import java.util.Map;
 @ControllerAdvice
 public class ValidationExceptionHandler {
 
-  @ExceptionHandler(MethodArgumentNotValidException.class)
-  public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
 
-    Map<String, String> exceptions = new HashMap<>();
-    ex.getBindingResult().getFieldErrors()
-        .forEach(fieldError -> exceptions.put(fieldError.getField(), fieldError.getDefaultMessage()));
+        Map<String, String> exceptions = new HashMap<>();
+        ex.getBindingResult().getFieldErrors()
+                .forEach(fieldError -> exceptions.put(fieldError.getField(), fieldError.getDefaultMessage()));
 
-    return new ResponseEntity<>(exceptions, HttpStatus.BAD_REQUEST);
-  }
+        return new ResponseEntity<>(exceptions, HttpStatus.BAD_REQUEST);
+    }
 
-  @ExceptionHandler(NotFoundException.class)
-  public ResponseEntity<String> handleNotFoundException(NotFoundException ex) {
-    return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-  }
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<String> handleNotFoundException(NotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
 
-  @ExceptionHandler(BadRequestException.class)
-  public ResponseEntity<String> handleBadRequestException(BadRequestException ex) {
-    return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
-  }
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<String> handleBadRequestException(BadRequestException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

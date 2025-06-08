@@ -8,13 +8,14 @@ import br.com.fiap.api_gs.entity.Sensor;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 public class DroneResponse {
 
-  private Long id;
-  private String modelo;
-  private String status;
-  private List<Relatorio> relatorios = new ArrayList<>();
-  private List<Sensor> sensores = new ArrayList<>();
+    private Long id;
+    private String modelo;
+    private String status;
+    private List<Relatorio> relatorios = new ArrayList<>();
+    private List<Sensor> sensores = new ArrayList<>();
 
 }

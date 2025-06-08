@@ -20,51 +20,51 @@ import br.com.fiap.api_gs.repository.EstadoRepository;
 @Service
 public class CidadeService {
 
-  @Autowired
-  private CidadeRepository cidadeRepository;
+    @Autowired
+    private CidadeRepository cidadeRepository;
 
-  @Autowired
-  private EstadoRepository estadoRepository;
+    @Autowired
+    private EstadoRepository estadoRepository;
 
-  public CidadeResponse save(CidadeRequest cidadeRequest){
-    Cidade cidade = cidadeRepository.save(toCidade(cidadeRequest));
-    return toResponse(cidade);
-  }
-
-  public Page<CidadeResponse> findAll(int pageNumber, int pageSize, String sort){
-    Pageable page = PageRequest.of(pageNumber, pageSize, Sort.by(sort));
-
-    Page<Cidade> cidades = cidadeRepository.findAll(page);
-    return cidades.map(this::toResponse);
-  }
-
-  public CidadeResponse findById(Long id){
-    Optional<Cidade> cidade = cidadeRepository.findById(id);
-    
-    if (cidade.isEmpty()){
-      throw new NotFoundException("Cidade não encontrada");
-    }
-    
-    return toResponse(cidade.get());
-  }
-
-  private Cidade toCidade(CidadeRequest cidadeRequest){
-    Optional<Estado> estado = estadoRepository.findById(cidadeRequest.getEstadoId());
-    if (estado.isEmpty()) {
-      throw new NotFoundException("Estado com esse Id não foi encontrado");
+    public CidadeResponse save(CidadeRequest cidadeRequest) {
+        Cidade cidade = cidadeRepository.save(toCidade(cidadeRequest));
+        return toResponse(cidade);
     }
 
-    Cidade cidade = new Cidade();
-    cidade.setEstado(estado.get());
-    cidade.setNome(cidadeRequest.getNome());
-    return cidade;
-  }
+    public Page<CidadeResponse> findAll(int pageNumber, int pageSize, String sort) {
+        Pageable page = PageRequest.of(pageNumber, pageSize, Sort.by(sort));
 
-  private CidadeResponse toResponse(Cidade cidade){
-    CidadeResponse cidadeResponse = new CidadeResponse();
-    cidadeResponse.setId(cidade.getId());
-    cidadeResponse.setNome(cidade.getNome());
-    cidadeResponse.setRelatorios(cidade.getRelatorios());
-    return cidadeResponse;
-  }
+        Page<Cidade> cidades = cidadeRepository.findAll(page);
+        return cidades.map(this::toResponse);
+    }
+
+    public CidadeResponse findById(Long id) {
+        Optional<Cidade> cidade = cidadeRepository.findById(id);
+
+        if (cidade.isEmpty()) {
+            throw new NotFoundException("Cidade não encontrada");
+        }
+
+        return toResponse(cidade.get());
+    }
+
+    private Cidade toCidade(CidadeRequest cidadeRequest) {
+        Optional<Estado> estado = estadoRepository.findById(cidadeRequest.getEstadoId());
+        if (estado.isEmpty()) {
+            throw new NotFoundException("Estado com esse Id não foi encontrado");
+        }
+
+        Cidade cidade = new Cidade();
+        cidade.setEstado(estado.get());
+        cidade.setNome(cidadeRequest.getNome());
+        return cidade;
+    }
+
+    private CidadeResponse toResponse(Cidade cidade) {
+        CidadeResponse cidadeResponse = new CidadeResponse();
+        cidadeResponse.setId(cidade.getId());
+        cidadeResponse.setNome(cidade.getNome());
+        cidadeResponse.setRelatorios(cidade.getRelatorios());
+        return cidadeResponse;
+    }
 }

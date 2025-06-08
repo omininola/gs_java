@@ -20,51 +20,51 @@ import br.com.fiap.api_gs.repository.PaisRepository;
 @Service
 public class EstadoService {
 
-  @Autowired
-  private EstadoRepository estadoRepository;
+    @Autowired
+    private EstadoRepository estadoRepository;
 
-  @Autowired
-  private PaisRepository paisRepository;
+    @Autowired
+    private PaisRepository paisRepository;
 
-  public EstadoResponse save(EstadoRequest estadoRequest){
-    Estado estado = estadoRepository.save(toEstado(estadoRequest));
-    return toResponse(estado);
-  }
-
-  public Page<EstadoResponse> findAll(int pageNumber, int pageSize, String sort){
-    Pageable page = PageRequest.of(pageNumber, pageSize, Sort.by(sort));
-
-    Page<Estado> estados = estadoRepository.findAll(page);
-    return estados.map(this::toResponse);
-  }
-
-  public EstadoResponse findById(Long id){
-    Optional<Estado> estado = estadoRepository.findById(id);
-    
-    if (estado.isEmpty()){
-      throw new NotFoundException("Estado não encontrado");
-    }
-    
-    return toResponse(estado.get());
-  }
-
-  private Estado toEstado(EstadoRequest estadoRequest){
-    Optional<Pais> pais = paisRepository.findById(estadoRequest.getPaisId());
-    if (pais.isEmpty()){
-      throw new NotFoundException("País com esse Id não foi encontrado");
+    public EstadoResponse save(EstadoRequest estadoRequest) {
+        Estado estado = estadoRepository.save(toEstado(estadoRequest));
+        return toResponse(estado);
     }
 
-    Estado estado = new Estado();
-    estado.setPais(pais.get());
-    estado.setNome(estadoRequest.getNome());
-    return estado;
-  }
+    public Page<EstadoResponse> findAll(int pageNumber, int pageSize, String sort) {
+        Pageable page = PageRequest.of(pageNumber, pageSize, Sort.by(sort));
 
-  private EstadoResponse toResponse(Estado estado){
-    EstadoResponse estadoResponse = new EstadoResponse();
-    estadoResponse.setId(estado.getId());
-    estadoResponse.setNome(estado.getNome());
-    estadoResponse.setCidades(estado.getCidades());
-    return estadoResponse;
-  }
+        Page<Estado> estados = estadoRepository.findAll(page);
+        return estados.map(this::toResponse);
+    }
+
+    public EstadoResponse findById(Long id) {
+        Optional<Estado> estado = estadoRepository.findById(id);
+
+        if (estado.isEmpty()) {
+            throw new NotFoundException("Estado não encontrado");
+        }
+
+        return toResponse(estado.get());
+    }
+
+    private Estado toEstado(EstadoRequest estadoRequest) {
+        Optional<Pais> pais = paisRepository.findById(estadoRequest.getPaisId());
+        if (pais.isEmpty()) {
+            throw new NotFoundException("País com esse Id não foi encontrado");
+        }
+
+        Estado estado = new Estado();
+        estado.setPais(pais.get());
+        estado.setNome(estadoRequest.getNome());
+        return estado;
+    }
+
+    private EstadoResponse toResponse(Estado estado) {
+        EstadoResponse estadoResponse = new EstadoResponse();
+        estadoResponse.setId(estado.getId());
+        estadoResponse.setNome(estado.getNome());
+        estadoResponse.setCidades(estado.getCidades());
+        return estadoResponse;
+    }
 }

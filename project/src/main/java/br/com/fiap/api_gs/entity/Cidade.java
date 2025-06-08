@@ -23,24 +23,25 @@ import lombok.Setter;
 @Entity
 @Table(name = "TB_GS_CIDADE")
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cidade {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(name = "nm_cidade", nullable = false)
-  private String nome;
+    @Column(name = "nm_cidade", nullable = false)
+    private String nome;
 
-  @ManyToOne
-  @JoinColumn(name = "estado_id")
-  @JsonIgnore
-  private Estado estado;
-  
-  @OneToMany(mappedBy = "cidade", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<Relatorio> relatorios = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "estado_id")
+    @JsonIgnore
+    private Estado estado;
+
+    @OneToMany(mappedBy = "cidade", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Relatorio> relatorios = new ArrayList<>();
 
 }

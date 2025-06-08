@@ -19,25 +19,26 @@ import lombok.Setter;
 @Entity
 @Table(name = "TB_GS_DRONE")
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Drone {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(name = "nm_modelo", nullable = false)
-  private String modelo;
-  
-  @Column(name = "nm_status", nullable = false)
-  private String status;
+    @Column(name = "nm_modelo", nullable = false)
+    private String modelo;
 
-  @OneToMany(mappedBy = "drone", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<Sensor> sensores = new ArrayList<>();
+    @Column(name = "nm_status", nullable = false)
+    private String status;
 
-  @OneToMany(mappedBy = "drone", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<Relatorio> relatorios = new ArrayList<>();
+    @OneToMany(mappedBy = "drone", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Sensor> sensores = new ArrayList<>();
+
+    @OneToMany(mappedBy = "drone", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Relatorio> relatorios = new ArrayList<>();
 
 }

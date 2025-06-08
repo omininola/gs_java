@@ -1,6 +1,6 @@
-# Sprint 1 Java
+# GS - Protech The Future | Java
 
-## Integrantes do Grupo
+## Integrantes
 
 | Nome                   |   RM   |
 | :--------------------- | :----: |
@@ -9,171 +9,57 @@
 
 ---
 
-## Descrição do Projeto
+## Links
 
-Este projeto é uma API REST que se comunica com o Banco da Oracle e
-permite por meio de endipoints realizar operações CRUD padrão em motos e
-filiais, e além disso, permite também a busca por parâmetros como nome da
-filial e paginação dos resultados
-
----
-
-## Configuração do Projeto
-
-### 1. Requisitos
-
-- Java Development Kit (JDK) 17 ou superior
-- Maven
-- Banco de dados Oracle acessível
-- IDE (IntelliJ IDEA, Eclipse, etc.)
-
-### 2. Configuração do Banco de Dados
-
-Dentro da pasta `resources`, atualize o arquivo `application.properties` com suas credenciais:
-
-```properties
-spring.application.name=api_sprint
-
-spring.datasource.url=jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl
-spring.datasource.username=RMXXXXXX
-spring.datasource.password=CALMAAAA
-spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
-
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.format_sql=true
-```
-
-### 4. Dependências Maven `pom.xml`
-
-```xml
-<dependencies>
-
-    <!-- Spring -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-validation</artifactId>
-    </dependency>
-
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-        <scope>test</scope>
-    </dependency>
-
-    <!-- Cache -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-cache</artifactId>
-    </dependency>
-
-    <!-- Driver JDBC Oracle -->
-    <dependency>
-        <groupId>com.oracle.database.jdbc</groupId>
-        <artifactId>ojdbc11</artifactId>
-        <scope>runtime</scope>
-    </dependency>
-
-    <!-- Lombok -->
-    <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <optional>true</optional>
-    </dependency>
-</dependencies>
-```
-
-### 5. Build Maven `pom.xml`
-
-```xml
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <annotationProcessorPaths>
-                    <path>
-                        <groupId>org.projectlombok</groupId>
-                        <artifactId>lombok</artifactId>
-                    </path>
-                </annotationProcessorPaths>
-            </configuration>
-        </plugin>
-
-        <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-            <configuration>
-                <excludes>
-                    <exclude>
-                        <groupId>org.projectlombok</groupId>
-                        <artifactId>lombok</artifactId>
-                    </exclude>
-                </excludes>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
-```
-
-### 6. Importação do Projeto
-
-- Importe o projeto para sua IDE.
-- Certifique-se de que as dependências do Maven estão resolvidas corretamente.
+- Github: https://github.com/omininola/gs_java
+- Deploy: https://gs-java-g2va.onrender.com/swagger-ui/index.html
+- Apresentação: 
+- Pitch: 
 
 ---
 
-## Rotas HTTP
+## Descrição 
 
-URL Base -> **localhost:8080**
+Desenvolvemos um aplicativo mobile em React Native voltado para o relato e monitoramento de incêndios e queimadas. O sistema permite que usuários façam cadastro, login e publiquem relatórios de ocorrências, com possibilidade de filtrar por cidade ou visualizar apenas seus próprios relatos.
 
-### Filiais
+Além disso, o app conta com um dashboard em tempo real, alimentado por dados do ThingSpeak, onde gráficos mostram informações captadas por sensores embarcados em drones que sobrevoam áreas críticas. Esses drones são capazes de gerar relatórios automáticos, otimizando a identificação e resposta a desastres ambientais.
 
-| Método | Rota | Parametros | Descrição |
-| ------ | ---- | :--------: | --------- |
-| POST   | [/filiais](localhost:8080/filiais) | x | Cria uma nova instância de filial |
-| GET    | [/filiais](localhost:8080/filiais?page=0&size=10&sort=nome) | page: number & size: number & sort: string | Retorna todas as filiais com controle de página e ordenação |
-| GET    | [/filiais/search](localhost:8080/filiais/search?nome=Filial1) | nome: string | Retorna todas as filiais que tem o nome passado no parâmetro |
-| GET    | [/filiais/{id}](localhost:8080/filiais/1) | x | Retorna a filial com o id fornecido |
-| PUT    | [/filiais/{id}](localhost:8080/filiais/1) | x | Atualiza a filial com o id fornecido |
-| DELETE | [/filiais/{id}](localhost:8080/filiais/1) | x | Delete a filial com o id fornecido |
+A aplicação consome uma REST API desenvolvida com Spring Boot, que se comunica com um banco de dados Oracle contendo tabelas interligadas como: Usuários, Relatórios, Drones, Sensores, Cidades, Estados e Países.
 
-#### JSON de uma filial
+Combinando dados manuais e automáticos, o sistema visa acelerar a detecção de incêndios e fornecer informações valiosas para tomada de decisão por autoridades e cidadãos.
 
-```javascript
-{
-    "nome": string,
-    "endereco": string
-}
-```
+---
 
-### Áreas
+## Testes
 
-| Método | Rota | Parametros | Descrição |
-| ------ | ---- | :--------: | --------- |
-| POST   | [/areas](localhost:8080/areas) | x | Cria uma nova instância de area |
-| GET    | [/areas](localhost:8080/areas?page=0&size=10&sort=status) | page: number & size: number & sort: string | Retorna todas as areas com controle de página e ordenação |
-| GET    | [/areas/search](localhost:8080/areas/search?filial=Filial1) | filial: string | Retorna todas as areas que pertencem à filial passada no parâmetro `filial` |
-| GET    | [/areas/{id}](localhost:8080/areas/1) | x | Retorna a area com o id fornecido |
-| PUT    | [/areas/{id}](localhost:8080/areas/1) | x | Atualiza a area com o id fornecido |
-| DELETE | [/areas/{id}](localhost:8080/areas/1) | x | Delete a area com o id fornecido |
+**Caso queira diretamente pelo deploy acesse: https://gs-java-g2va.onrender.com/swagger-ui/index.html**
 
-#### JSON de uma area
+E siga a partir de [Spring Security + JWT](#spring-security--jwt)
 
-```javascript
-{
-    "status": string,
-    "filialId": number
-}
-```
+### Inicialização local
+
+1. Clone esse repositório: `git clone https://github.com/omininola/gs_java`
+2. Entre na pasta do projeto: `cd gs_java/project`
+3. Build o projeto utilizando o Maven: `./mvnw package`
+4. Rode o jar buildado: `java -jar target/api_gs-0.0.1-SNAPSHOT.jar`
+5. Vá até a URL: http://localhost:8080/swagger-ui/index.html
+
+### Spring Security + JWT
+
+Por padrão todas as rotas precisam de autenticação para serem acessadas
+
+Dica importante: faça um usuário com a `role: "ADMIN"`, assim você tera acesso a todos os endpoints quando o seu token for gerado
+
+Você pode gerar um token pela rota [/usuarios/register](http://localhost:8080/swagger-ui/index.html#/usuario-controller/createUsuario)
+Ou resgatar um token (caso já tenha um conta para logar) pela rota [/usuarios/login](http://localhost:8080/swagger-ui/index.html#/usuario-controller/loginUsuario)
+
+Com o token em mãos, você pode clicar no botão verde e colar o seu token:
+![Botão de autorização](docs/image.png)
+![Modal de autorização](docs/image2.png)
+
+Depois disso você pode explorar todos os endpoints da nossa API
+
+## Endpoints
+
+Caso queira testas nossos endpoints pelo Postman ou outra aplicação, nossa documentação em formato JSON está aqui:
+[endpoints.json](docs/endpoints.json)
