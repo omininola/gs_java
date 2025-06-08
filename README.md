@@ -13,12 +13,12 @@
 
 - Github: https://github.com/omininola/gs_java
 - Deploy: https://gs-java-g2va.onrender.com/swagger-ui/index.html
-- Apresentação: 
-- Pitch: 
+- Apresentação: https://youtu.be/bRSp333JNwI
+- Pitch:
 
 ---
 
-## Descrição 
+## Descrição
 
 Desenvolvemos um aplicativo mobile em React Native voltado para o relato e monitoramento de incêndios e queimadas. O sistema permite que usuários façam cadastro, login e publiquem relatórios de ocorrências, com possibilidade de filtrar por cidade ou visualizar apenas seus próprios relatos.
 
