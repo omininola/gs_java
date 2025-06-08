@@ -14,7 +14,7 @@
 - Github: https://github.com/omininola/gs_java
 - Deploy: https://gs-java-g2va.onrender.com/swagger-ui/index.html
 - Apresentação: https://youtu.be/bRSp333JNwI
-- Pitch:
+- Pitch: https://youtu.be/Sd4V2oEn3bM
 
 ---
 
