@@ -36,7 +36,8 @@ public class UsuarioService {
     private TokenService tokenService;
 
     public AuthResponse save(UsuarioRequest usuarioRequest) {
-        if (usuarioRepository.findByEmail(usuarioRequest.getEmail()) != null) {
+        Usuario existingUsuario = (Usuario) usuarioRepository.findByEmail(usuarioRequest.getEmail());
+        if (existingUsuario != null) {
             throw new BadRequestException("Email já cadastrado");
         }
 
@@ -46,28 +47,16 @@ public class UsuarioService {
 
         Usuario usuario = usuarioRepository.save(toUsuario(usuarioRequest));
 
-        String token = getToken(new UsuarioLoginRequest(usuarioRequest.getEmail(), rawPassword));
-
-        AuthResponse authResponse = new AuthResponse();
-        authResponse.setToken(token);
-        authResponse.setUsuario(toResponse(usuario));
-
-        return authResponse;
+        return authenticateAndBuildResponse(usuario.getEmail(), rawPassword);
     }
 
     public AuthResponse login(UsuarioLoginRequest usuarioLoginRequest) {
-        String token = getToken(usuarioLoginRequest);
-
         Usuario usuario = (Usuario) usuarioRepository.findByEmail(usuarioLoginRequest.getEmail());
         if (usuario == null) {
             throw new NotFoundException("Email não encontrado");
         }
 
-        AuthResponse authResponse = new AuthResponse();
-        authResponse.setToken(token);
-        authResponse.setUsuario(toResponse(usuario));
-
-        return authResponse;
+        return authenticateAndBuildResponse(usuarioLoginRequest.getEmail(), usuarioLoginRequest.getSenha());
     }
 
     public Page<UsuarioResponse> findAll(int pageNumber, int pageSize, String sort) {
@@ -138,15 +127,20 @@ public class UsuarioService {
         return usuarioResponse;
     }
 
-    private String getToken(UsuarioLoginRequest usuarioLoginRequest) {
-        UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(
-                usuarioLoginRequest.getEmail(),
-                usuarioLoginRequest.getSenha());
+    private AuthResponse authenticateAndBuildResponse(String email, String rawPassword) {
+        UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(email,
+                rawPassword);
 
         Authentication auth = authenticationManager.authenticate(usernamePassword);
+        Usuario usuario = (Usuario) auth.getPrincipal();
 
-        String token = tokenService.gerarToken((Usuario) auth.getPrincipal());
+        String token = tokenService.gerarToken(usuario);
 
-        return token;
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setToken(token);
+        authResponse.setUsuario(toResponse(usuario));
+
+        return authResponse;
     }
+
 }
