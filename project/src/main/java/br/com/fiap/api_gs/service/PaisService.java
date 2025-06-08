@@ -18,42 +18,42 @@ import br.com.fiap.api_gs.repository.PaisRepository;
 @Service
 public class PaisService {
 
-  @Autowired
-  private PaisRepository paisRepository;
+    @Autowired
+    private PaisRepository paisRepository;
 
-  public PaisResponse save(PaisRequest paisRequest){
-    Pais pais = paisRepository.save(toPais(paisRequest));
-    return toResponse(pais);
-  }
-
-  public Page<PaisResponse> findAll(int pageNumber, int pageSize, String sort){
-    Pageable page = PageRequest.of(pageNumber, pageSize, Sort.by(sort));
-
-    Page<Pais> paises = paisRepository.findAll(page);
-    return paises.map(this::toResponse);
-  }
-
-  public PaisResponse findById(Long id){
-    Optional<Pais> pais = paisRepository.findById(id);
-    
-    if (pais.isEmpty()){
-      throw new NotFoundException("País não encontrado");
+    public PaisResponse save(PaisRequest paisRequest) {
+        Pais pais = paisRepository.save(toPais(paisRequest));
+        return toResponse(pais);
     }
-    
-    return toResponse(pais.get());
-  }
 
-  private Pais toPais(PaisRequest paisRequest){
-    Pais pais = new Pais();
-    pais.setNome(paisRequest.getNome());
-    return pais;
-  }
+    public Page<PaisResponse> findAll(int pageNumber, int pageSize, String sort) {
+        Pageable page = PageRequest.of(pageNumber, pageSize, Sort.by(sort));
 
-  private PaisResponse toResponse(Pais pais){
-    PaisResponse paisResponse = new PaisResponse();
-    paisResponse.setId(pais.getId());
-    paisResponse.setNome(pais.getNome());
-    paisResponse.setEstados(pais.getEstados());
-    return paisResponse;
-  }
+        Page<Pais> paises = paisRepository.findAll(page);
+        return paises.map(this::toResponse);
+    }
+
+    public PaisResponse findById(Long id) {
+        Optional<Pais> pais = paisRepository.findById(id);
+
+        if (pais.isEmpty()) {
+            throw new NotFoundException("País não encontrado");
+        }
+
+        return toResponse(pais.get());
+    }
+
+    private Pais toPais(PaisRequest paisRequest) {
+        Pais pais = new Pais();
+        pais.setNome(paisRequest.getNome());
+        return pais;
+    }
+
+    private PaisResponse toResponse(Pais pais) {
+        PaisResponse paisResponse = new PaisResponse();
+        paisResponse.setId(pais.getId());
+        paisResponse.setNome(pais.getNome());
+        paisResponse.setEstados(pais.getEstados());
+        return paisResponse;
+    }
 }

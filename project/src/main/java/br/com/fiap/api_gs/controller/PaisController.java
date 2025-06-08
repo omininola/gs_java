@@ -21,32 +21,31 @@ import jakarta.validation.Valid;
 @RequestMapping("/paises")
 public class PaisController {
 
-  @Autowired
-  private PaisService paisService;
+    @Autowired
+    private PaisService paisService;
 
-  // POST
-  @PostMapping
-  public ResponseEntity<PaisResponse> createPais(@Valid @RequestBody PaisRequest paisRequest){
-    PaisResponse pais = paisService.save(paisRequest);
-    return new ResponseEntity<>(pais, HttpStatus.OK);
-  }
+    // POST
+    @PostMapping
+    public ResponseEntity<PaisResponse> createPais(@Valid @RequestBody PaisRequest paisRequest) {
+        PaisResponse pais = paisService.save(paisRequest);
+        return new ResponseEntity<>(pais, HttpStatus.OK);
+    }
 
-  // GET - All
-  @GetMapping
-  public ResponseEntity<Page<PaisResponse>> readPaises(
-    @RequestParam(defaultValue = "0") int pageNumber,
-    @RequestParam(defaultValue = "10") int pageSize,
-    @RequestParam(defaultValue = "id") String sort
-  ){
-    Page<PaisResponse> paises = paisService.findAll(pageNumber, pageSize, sort);
-    return new ResponseEntity<>(paises, HttpStatus.OK);
-  }
+    // GET - All
+    @GetMapping
+    public ResponseEntity<Page<PaisResponse>> readPaises(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "10") int pageSize,
+            @RequestParam(defaultValue = "id") String sort) {
+        Page<PaisResponse> paises = paisService.findAll(pageNumber, pageSize, sort);
+        return new ResponseEntity<>(paises, HttpStatus.OK);
+    }
 
-  // GET - Id
-  @GetMapping("/{id}")
-  public ResponseEntity<PaisResponse> readPais(@PathVariable Long id){
-    PaisResponse pais = paisService.findById(id);
-    return new ResponseEntity<>(pais, HttpStatus.OK);
-  }
+    // GET - Id
+    @GetMapping("/{id}")
+    public ResponseEntity<PaisResponse> readPais(@PathVariable Long id) {
+        PaisResponse pais = paisService.findById(id);
+        return new ResponseEntity<>(pais, HttpStatus.OK);
+    }
 
 }

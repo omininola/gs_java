@@ -7,13 +7,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaisRequest {
 
-  @NotBlank(message = "Nome do país deve ser preenchido")
-  @Size(max = 50, message = "Nome do país deve ter no máximo 50 caracteres")
-  private String nome;
+    @NotBlank(message = "Nome do país deve ser preenchido")
+    @Size(max = 50, message = "Nome do país deve ter no máximo 50 caracteres")
+    private String nome;
 
 }

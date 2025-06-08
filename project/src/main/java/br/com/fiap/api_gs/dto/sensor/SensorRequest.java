@@ -7,20 +7,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class SensorRequest {
 
-  @NotNull(message = "Id do drone deve ser preenchido")
-  private Long droneId;
+    @NotNull(message = "Id do drone deve ser preenchido")
+    private Long droneId;
 
-  @NotBlank(message = "Tipo do sensor deve ser preenchido")
-  private String tipo;
+    @NotBlank(message = "Tipo do sensor deve ser preenchido")
+    private String tipo;
 
-  @NotBlank(message = "Status do sensor deve ser preenchido")
-  private String status;
+    @NotBlank(message = "Status do sensor deve ser preenchido")
+    private String status;
 
-  private String descricao;
+    private String descricao;
 
 }

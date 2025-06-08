@@ -22,24 +22,25 @@ import lombok.Setter;
 @Entity
 @Table(name = "TB_GS_ESTADO")
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Estado {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @ManyToOne
-  @JoinColumn(name = "pais_id")
-  @JsonIgnore
-  private Pais pais;
+    @ManyToOne
+    @JoinColumn(name = "pais_id")
+    @JsonIgnore
+    private Pais pais;
 
-  @Column(name = "nm_estado", nullable = false)
-  private String nome;
+    @Column(name = "nm_estado", nullable = false)
+    private String nome;
 
-  @OneToMany(mappedBy = "estado")
-  private List<Cidade> cidades = new ArrayList<>();
+    @OneToMany(mappedBy = "estado")
+    private List<Cidade> cidades = new ArrayList<>();
 
 }

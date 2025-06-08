@@ -26,22 +26,22 @@ public class SensorService {
   @Autowired
   private DroneRepository droneRepository;
 
-  public SensorResponse save(SensorRequest sensorRequest){
+  public SensorResponse save(SensorRequest sensorRequest) {
     Sensor sensor = sensorRepository.save(toSensor(sensorRequest));
     return toResponse(sensor);
   }
 
-  public Page<SensorResponse> findAll(int pageNumber, int pageSize, String sort){
+  public Page<SensorResponse> findAll(int pageNumber, int pageSize, String sort) {
     Pageable page = PageRequest.of(pageNumber, pageSize, Sort.by(sort));
 
     Page<Sensor> sensores = sensorRepository.findAll(page);
     return sensores.map(this::toResponse);
   }
 
-  public SensorResponse findById(Long id){
+  public SensorResponse findById(Long id) {
     Optional<Sensor> sensor = sensorRepository.findById(id);
 
-    if (sensor.isEmpty()){
+    if (sensor.isEmpty()) {
       throw new NotFoundException("Sensor não encontrado");
     }
 
@@ -51,10 +51,10 @@ public class SensorService {
   public Sensor toSensor(SensorRequest sensorRequest) throws NotFoundException {
     Optional<Drone> drone = droneRepository.findById(sensorRequest.getDroneId());
 
-    if (drone.isEmpty()){
-        throw new NotFoundException("Drone com esse Id não foi encontrado");
+    if (drone.isEmpty()) {
+      throw new NotFoundException("Drone com esse Id não foi encontrado");
     }
-    
+
     Sensor sensor = new Sensor();
     sensor.setDrone(drone.get());
     sensor.setTipo(sensorRequest.getTipo());
@@ -63,14 +63,14 @@ public class SensorService {
     return sensor;
   }
 
-  public SensorResponse toResponse(Sensor sensor){
+  public SensorResponse toResponse(Sensor sensor) {
     SensorResponse sensorResponse = new SensorResponse();
     sensorResponse.setId(sensor.getId());
     sensorResponse.setDroneId(sensor.getDrone().getId());
     sensorResponse.setTipo(sensor.getTipo());
     sensorResponse.setStatus(sensor.getStatus());
     sensorResponse.setDescricao(sensor.getDescricao());
-    
-    return sensorResponse; 
+
+    return sensorResponse;
   }
 }

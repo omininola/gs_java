@@ -21,30 +21,29 @@ import jakarta.validation.Valid;
 @RequestMapping("/sensores")
 public class SensorController {
 
-  @Autowired
-  private SensorService sensorService;
+    @Autowired
+    private SensorService sensorService;
 
-  // POST
-  @PostMapping
-  public ResponseEntity<SensorResponse> createSensor(@Valid @RequestBody SensorRequest sensorRequest){
-    return new ResponseEntity<>(sensorService.save(sensorRequest), HttpStatus.OK);
-  }
+    // POST
+    @PostMapping
+    public ResponseEntity<SensorResponse> createSensor(@Valid @RequestBody SensorRequest sensorRequest) {
+        return new ResponseEntity<>(sensorService.save(sensorRequest), HttpStatus.OK);
+    }
 
-  // GET - All
-  @GetMapping
-  public ResponseEntity<Page<SensorResponse>> readSensores(
-    @RequestParam(defaultValue = "0") int pageNumber,
-    @RequestParam(defaultValue = "10") int pageSize,
-    @RequestParam(defaultValue = "id") String sort
-  ) {
-    return new ResponseEntity<>(sensorService.findAll(pageNumber, pageSize, sort), HttpStatus.OK);
-  }
+    // GET - All
+    @GetMapping
+    public ResponseEntity<Page<SensorResponse>> readSensores(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "10") int pageSize,
+            @RequestParam(defaultValue = "id") String sort) {
+        return new ResponseEntity<>(sensorService.findAll(pageNumber, pageSize, sort), HttpStatus.OK);
+    }
 
-  // GET - Id
-  @GetMapping("/{id}")
-  public ResponseEntity<SensorResponse> readSensor(@PathVariable Long id){
-    SensorResponse sensor = sensorService.findById(id);
-    return new ResponseEntity<>(sensor, HttpStatus.OK);
-  }
+    // GET - Id
+    @GetMapping("/{id}")
+    public ResponseEntity<SensorResponse> readSensor(@PathVariable Long id) {
+        SensorResponse sensor = sensorService.findById(id);
+        return new ResponseEntity<>(sensor, HttpStatus.OK);
+    }
 
 }

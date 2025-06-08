@@ -18,73 +18,73 @@ import br.com.fiap.api_gs.repository.DroneRepository;
 @Service
 public class DroneService {
 
-  @Autowired
-  private DroneRepository droneRepository;
+    @Autowired
+    private DroneRepository droneRepository;
 
-  public DroneResponse save(DroneRequest droneRequest){
-    Drone drone = droneRepository.save(toDrone(droneRequest));
-    return toResponse(drone);
-  }
-
-  public Page<DroneResponse> findAll(int pageNumber, int pageSize, String sort){
-    Pageable page = PageRequest.of(pageNumber, pageSize, Sort.by(sort));
-
-    Page<Drone> drones = droneRepository.findAll(page);
-    return drones.map(this::toResponse);
-  }
-
-  public DroneResponse findById(Long id){
-    Optional<Drone> drone = droneRepository.findById(id);
-
-    if (drone.isEmpty()){
-      throw new NotFoundException("Drone não encontrado");
+    public DroneResponse save(DroneRequest droneRequest) {
+        Drone drone = droneRepository.save(toDrone(droneRequest));
+        return toResponse(drone);
     }
 
-    return toResponse(drone.get());
-  }
+    public Page<DroneResponse> findAll(int pageNumber, int pageSize, String sort) {
+        Pageable page = PageRequest.of(pageNumber, pageSize, Sort.by(sort));
 
-  public DroneResponse update(DroneRequest droneRequest, Long id) {
-    Optional<Drone> drone = droneRepository.findById(id);
-
-    if (drone.isEmpty()){
-      throw new NotFoundException("Drone não encontrado");
+        Page<Drone> drones = droneRepository.findAll(page);
+        return drones.map(this::toResponse);
     }
 
-    Drone droneUpdate = drone.get();
-    droneUpdate.setModelo(droneRequest.getModelo());
-    droneUpdate.setStatus(droneRequest.getStatus());
+    public DroneResponse findById(Long id) {
+        Optional<Drone> drone = droneRepository.findById(id);
 
-    droneRepository.save(droneUpdate);
+        if (drone.isEmpty()) {
+            throw new NotFoundException("Drone não encontrado");
+        }
 
-    return toResponse(droneUpdate);
-  }
-
-  public void delete(Long id){
-    Optional<Drone> drone = droneRepository.findById(id);
-
-    if (drone.isEmpty()){
-      throw new NotFoundException("Drone não encontrado");
+        return toResponse(drone.get());
     }
 
-    droneRepository.delete(drone.get());
-  }
+    public DroneResponse update(DroneRequest droneRequest, Long id) {
+        Optional<Drone> drone = droneRepository.findById(id);
 
-  private Drone toDrone(DroneRequest droneRequest){
-    Drone drone = new Drone();
-    drone.setModelo(droneRequest.getModelo());
-    drone.setStatus(droneRequest.getStatus());
+        if (drone.isEmpty()) {
+            throw new NotFoundException("Drone não encontrado");
+        }
 
-    return drone;
-  }
+        Drone droneUpdate = drone.get();
+        droneUpdate.setModelo(droneRequest.getModelo());
+        droneUpdate.setStatus(droneRequest.getStatus());
 
-  private DroneResponse toResponse(Drone drone){
-    DroneResponse droneResponse = new DroneResponse();
-    droneResponse.setId(drone.getId());
-    droneResponse.setModelo(drone.getModelo());
-    droneResponse.setStatus(drone.getStatus());
-    droneResponse.setRelatorios(drone.getRelatorios());
-    droneResponse.setSensores(drone.getSensores());
+        droneRepository.save(droneUpdate);
 
-    return droneResponse;
-  }
+        return toResponse(droneUpdate);
+    }
+
+    public void delete(Long id) {
+        Optional<Drone> drone = droneRepository.findById(id);
+
+        if (drone.isEmpty()) {
+            throw new NotFoundException("Drone não encontrado");
+        }
+
+        droneRepository.delete(drone.get());
+    }
+
+    private Drone toDrone(DroneRequest droneRequest) {
+        Drone drone = new Drone();
+        drone.setModelo(droneRequest.getModelo());
+        drone.setStatus(droneRequest.getStatus());
+
+        return drone;
+    }
+
+    private DroneResponse toResponse(Drone drone) {
+        DroneResponse droneResponse = new DroneResponse();
+        droneResponse.setId(drone.getId());
+        droneResponse.setModelo(drone.getModelo());
+        droneResponse.setStatus(drone.getStatus());
+        droneResponse.setRelatorios(drone.getRelatorios());
+        droneResponse.setSensores(drone.getSensores());
+
+        return droneResponse;
+    }
 }

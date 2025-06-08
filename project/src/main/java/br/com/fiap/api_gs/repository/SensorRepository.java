@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import br.com.fiap.api_gs.entity.Sensor;
 
 @Repository
-public interface SensorRepository extends JpaRepository<Sensor, Long>{
+public interface SensorRepository extends JpaRepository<Sensor, Long> {
 }

@@ -18,27 +18,28 @@ import lombok.Setter;
 @Entity
 @Table(name = "TB_GS_SENSOR")
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Sensor {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @ManyToOne
-  @JoinColumn(name = "drone_id")
-  @JsonIgnore
-  private Drone drone;
+    @ManyToOne
+    @JoinColumn(name = "drone_id")
+    @JsonIgnore
+    private Drone drone;
 
-  @Column(name = "tipo", nullable = false)
-  private String tipo;
-  
-  @Column(name = "nm_status", nullable = false)
-  private String status;
+    @Column(name = "tipo", nullable = false)
+    private String tipo;
 
-  @Column(name = "desc_drone", nullable = true)
-  private String descricao;
+    @Column(name = "nm_status", nullable = false)
+    private String status;
+
+    @Column(name = "desc_drone", nullable = true)
+    private String descricao;
 
 }
